@@ -4,6 +4,7 @@
   border-radius: 0.5rem;
   overflow: hidden;
 }
+
 .gc-copy-btn {
   position: absolute;
   top: 0.5rem;
@@ -19,20 +20,98 @@
   color: #94a3b8;
   cursor: pointer;
   transition: all 150ms;
+  z-index: 1;
 }
+
 .gc-copy-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #e2e8f0;
 }
+
 pre {
   margin: 0;
   padding: 1rem;
+  padding-right: 3rem;
   overflow-x: auto;
   font-size: 0.8125rem;
   line-height: 1.6;
 }
+
 code {
-  color: #e2e8f0;
   font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
   white-space: pre;
+}
+
+/* ─── Highlight.js token colors (One Dark inspired) ─────────────────────── */
+
+code .hljs-keyword,
+code .hljs-selector-tag,
+code .hljs-meta {
+  color: #c678dd;
+}
+
+code .hljs-string,
+code .hljs-attr,
+code .hljs-attribute,
+code .hljs-addition {
+  color: #98c379;
+}
+
+code .hljs-number,
+code .hljs-literal {
+  color: #d19a66;
+}
+
+code .hljs-comment,
+code .hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+code .hljs-title,
+code .hljs-title.class_,
+code .hljs-title.class_.inherited__,
+code .hljs-type {
+  color: #e5c07b;
+}
+
+code .hljs-title.function_ {
+  color: #61afef;
+}
+
+code .hljs-name,
+code .hljs-tag {
+  color: #e06c75;
+}
+
+code .hljs-built_in,
+code .hljs-class {
+  color: #56b6c2;
+}
+
+code .hljs-variable,
+code .hljs-template-variable,
+code .hljs-params {
+  color: #abb2bf;
+}
+
+code .hljs-property {
+  color: #61afef;
+}
+
+code .hljs-operator,
+code .hljs-punctuation {
+  color: #abb2bf;
+}
+
+code .hljs-symbol,
+code .hljs-bullet,
+code .hljs-link {
+  color: #56b6c2;
+}
+
+/* Default text color for unhighlighted tokens */
+code .hljs,
+code {
+  color: #abb2bf;
 }

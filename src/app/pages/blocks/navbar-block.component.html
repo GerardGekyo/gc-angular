@@ -1,0 +1,391 @@
+<!-- Page header -->
+<div class="px-4 sm:px-8 pt-8 pb-4 max-w-5xl mx-auto">
+  <div class="mb-1">
+    <span class="text-xs font-semibold uppercase tracking-widest text-gray-400">Blocks · Navigation</span>
+  </div>
+  <h1 class="text-2xl font-bold text-gray-900 mb-2">Navbar</h1>
+  <p class="text-sm text-gray-500 max-w-2xl">
+    Cinco variantes de barra de navegación totalmente responsive con menú hamburguesa en móvil.
+    Los botones de hamburguesa son interactivos en la preview.
+  </p>
+</div>
+
+<div class="px-4 sm:px-8 pb-12 max-w-5xl mx-auto space-y-12">
+
+  <!-- Navbar 1: Minimal -->
+  <doc-example-tabs
+    title="Minimal"
+    description="Logo a la izquierda, links centrados y botón CTA a la derecha. En móvil muestra menú hamburguesa con todos los links y acciones."
+    [htmlCode]="navbar1Html"
+    [tsCode]="navbar1Ts"
+  >
+    <nav class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-14">
+
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2 shrink-0" (click)="$event.preventDefault()">
+            <span class="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm">G</span>
+            <span class="font-semibold text-gray-900 text-sm">Garaq UI</span>
+          </a>
+
+          <!-- Desktop links -->
+          <div class="hidden md:flex items-center gap-1">
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Ejemplos</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Docs</a>
+          </div>
+
+          <!-- Desktop actions -->
+          <div class="hidden md:flex items-center gap-2">
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 rounded-md transition-colors" (click)="$event.preventDefault()">Entrar</a>
+            <gc-button size="sm">Comenzar</gc-button>
+          </div>
+
+          <!-- Mobile hamburger -->
+          <button
+            class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            [attr.aria-expanded]="menu1Open()"
+            aria-label="Abrir menú"
+            (click)="menu1Open.set(!menu1Open())"
+          >
+            @if (menu1Open()) {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      @if (menu1Open()) {
+        <div class="md:hidden border-t border-gray-100">
+          <div class="px-4 py-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Ejemplos</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Docs</a>
+            <div class="pt-3 mt-1 border-t border-gray-100 flex flex-col gap-2">
+              <a href="#" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Entrar</a>
+              <gc-button size="sm">Comenzar</gc-button>
+            </div>
+          </div>
+        </div>
+      }
+    </nav>
+  </doc-example-tabs>
+
+  <!-- Navbar 2: Dark -->
+  <doc-example-tabs
+    title="Oscuro"
+    description="Fondo zinc-900 con texto en tonos zinc para los links y blanco para el logo. El menú móvil mantiene el mismo esquema oscuro."
+    [htmlCode]="navbar2Html"
+    [tsCode]="navbar2Ts"
+  >
+    <nav class="bg-zinc-900">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-14">
+
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2 shrink-0" (click)="$event.preventDefault()">
+            <span class="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-zinc-900 font-bold text-sm">G</span>
+            <span class="font-semibold text-white text-sm">Garaq UI</span>
+          </a>
+
+          <!-- Desktop links -->
+          <div class="hidden md:flex items-center gap-1">
+            <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors" (click)="$event.preventDefault()">Ejemplos</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md transition-colors" (click)="$event.preventDefault()">Docs</a>
+          </div>
+
+          <!-- Desktop actions -->
+          <div class="hidden md:flex items-center gap-3">
+            <a href="#" class="text-sm text-zinc-400 hover:text-white transition-colors" (click)="$event.preventDefault()">GitHub</a>
+            <gc-button size="sm" variant="ghost">Comenzar gratis</gc-button>
+          </div>
+
+          <!-- Mobile hamburger -->
+          <button
+            class="md:hidden p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+            [attr.aria-expanded]="menu2Open()"
+            aria-label="Abrir menú"
+            (click)="menu2Open.set(!menu2Open())"
+          >
+            @if (menu2Open()) {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu dark -->
+      @if (menu2Open()) {
+        <div class="md:hidden border-t border-zinc-800">
+          <div class="px-4 py-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md" (click)="$event.preventDefault()">Ejemplos</a>
+            <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md" (click)="$event.preventDefault()">Docs</a>
+            <div class="pt-3 mt-1 border-t border-zinc-800 flex flex-col gap-2">
+              <a href="#" class="block px-3 py-2 text-sm text-zinc-400 hover:bg-zinc-800 rounded-md" (click)="$event.preventDefault()">GitHub</a>
+              <gc-button size="sm" variant="ghost">Comenzar gratis</gc-button>
+            </div>
+          </div>
+        </div>
+      }
+    </nav>
+  </doc-example-tabs>
+
+  <!-- Navbar 3: Centered Logo -->
+  <doc-example-tabs
+    title="Logo Centrado"
+    description="Logo centrado en desktop con links simétricos a izquierda y derecha. En móvil el logo se mueve a la izquierda y aparece el hamburger."
+    [htmlCode]="navbar3Html"
+    [tsCode]="navbar3Ts"
+  >
+    <nav class="bg-white border-b border-gray-100 shadow-sm">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center h-14">
+
+          <!-- Left zone (flex-1) -->
+          <div class="flex-1 flex items-center gap-1">
+            <!-- Mobile logo -->
+            <a href="#" class="md:hidden flex items-center gap-2" (click)="$event.preventDefault()">
+              <span class="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm">G</span>
+              <span class="font-semibold text-gray-900 text-sm">Garaq UI</span>
+            </a>
+            <!-- Desktop left links -->
+            <div class="hidden md:flex items-center gap-1">
+              <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Inicio</a>
+              <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Producto</a>
+              <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Precios</a>
+            </div>
+          </div>
+
+          <!-- Center logo (desktop only) -->
+          <a href="#" class="hidden md:flex items-center gap-2 shrink-0" (click)="$event.preventDefault()">
+            <span class="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm">G</span>
+            <span class="font-semibold text-gray-900 text-sm">Garaq UI</span>
+          </a>
+
+          <!-- Right zone (flex-1) -->
+          <div class="flex-1 flex items-center justify-end gap-2">
+            <div class="hidden md:flex items-center gap-1">
+              <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Blog</a>
+              <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Docs</a>
+            </div>
+            <div class="hidden md:block">
+              <gc-button size="sm">GitHub</gc-button>
+            </div>
+            <!-- Mobile hamburger -->
+            <button
+              class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              [attr.aria-expanded]="menu3Open()"
+              aria-label="Abrir menú"
+              (click)="menu3Open.set(!menu3Open())"
+            >
+              @if (menu3Open()) {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      @if (menu3Open()) {
+        <div class="md:hidden border-t border-gray-100">
+          <div class="px-4 py-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Producto</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Precios</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Blog</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Docs</a>
+            <div class="pt-3 mt-1 border-t border-gray-100">
+              <gc-button size="sm">GitHub</gc-button>
+            </div>
+          </div>
+        </div>
+      }
+    </nav>
+  </doc-example-tabs>
+
+  <!-- Navbar 4: Con Búsqueda -->
+  <doc-example-tabs
+    title="Con Búsqueda"
+    description="Barra de búsqueda en el centro del desktop. En móvil el ícono de lupa despliega el campo de búsqueda debajo de la barra."
+    [htmlCode]="navbar4Html"
+    [tsCode]="navbar4Ts"
+  >
+    <nav class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-3 h-14">
+
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2 shrink-0" (click)="$event.preventDefault()">
+            <span class="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm">G</span>
+            <span class="hidden sm:block font-semibold text-gray-900 text-sm">Garaq UI</span>
+          </a>
+
+          <!-- Search (desktop) -->
+          <div class="hidden md:flex flex-1 max-w-sm relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input type="search" placeholder="Buscar componentes..." class="w-full pl-9 pr-3 py-1.5 bg-gray-100 border border-transparent rounded-lg text-sm placeholder:text-gray-400 focus:outline-none focus:border-gray-300 focus:bg-white transition-colors" />
+          </div>
+
+          <!-- Spacer -->
+          <div class="flex-1"></div>
+
+          <!-- Desktop actions -->
+          <div class="hidden md:flex items-center gap-1">
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Docs</a>
+            <button class="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Notificaciones">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </button>
+            <gc-button size="sm">Iniciar sesión</gc-button>
+          </div>
+
+          <!-- Mobile: search icon + hamburger -->
+          <div class="md:hidden flex items-center gap-1">
+            <button class="p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors" (click)="searchOpen.set(!searchOpen())" aria-label="Buscar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+            <button
+              class="p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              [attr.aria-expanded]="menu4Open()"
+              aria-label="Abrir menú"
+              (click)="menu4Open.set(!menu4Open())"
+            >
+              @if (menu4Open()) {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              }
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile search bar -->
+        @if (searchOpen()) {
+          <div class="md:hidden pb-3">
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input type="search" placeholder="Buscar componentes..." class="w-full pl-9 pr-3 py-2 bg-gray-100 border border-transparent rounded-lg text-sm placeholder:text-gray-400 focus:outline-none focus:border-gray-300 focus:bg-white transition-colors" />
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Mobile menu -->
+      @if (menu4Open()) {
+        <div class="md:hidden border-t border-gray-100">
+          <div class="px-4 py-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Docs</a>
+            <div class="pt-3 mt-1 border-t border-gray-100">
+              <gc-button size="sm">Iniciar sesión</gc-button>
+            </div>
+          </div>
+        </div>
+      }
+    </nav>
+  </doc-example-tabs>
+
+  <!-- Navbar 5: Con Notificaciones y Avatar -->
+  <doc-example-tabs
+    title="Con Notificaciones y Avatar"
+    description="Navbar de aplicación autenticada: links con badge de versión, campana con punto de notificación y avatar de usuario. En móvil muestra el perfil completo en el menú."
+    [htmlCode]="navbar5Html"
+    [tsCode]="navbar5Ts"
+  >
+    <nav class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-14">
+
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2 shrink-0" (click)="$event.preventDefault()">
+            <span class="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center text-white font-bold text-sm">G</span>
+            <span class="font-semibold text-gray-900 text-sm">Garaq UI</span>
+          </a>
+
+          <!-- Desktop links + badge -->
+          <div class="hidden md:flex items-center gap-1">
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors" (click)="$event.preventDefault()">Ejemplos</a>
+            <span class="ml-2 text-xs font-semibold px-2 py-0.5 bg-zinc-100 text-zinc-600 rounded-full">v2.0</span>
+          </div>
+
+          <!-- Desktop right: bell + avatar -->
+          <div class="hidden md:flex items-center gap-2">
+            <button class="relative p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Notificaciones">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+            </button>
+            <button class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white text-xs font-semibold hover:ring-2 hover:ring-zinc-300 hover:ring-offset-1 transition-all" aria-label="Perfil">
+              JG
+            </button>
+          </div>
+
+          <!-- Mobile: bell + hamburger -->
+          <div class="md:hidden flex items-center gap-1">
+            <button class="relative p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Notificaciones">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+            </button>
+            <button
+              class="p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              [attr.aria-expanded]="menu5Open()"
+              aria-label="Abrir menú"
+              (click)="menu5Open.set(!menu5Open())"
+            >
+              @if (menu5Open()) {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu with profile -->
+      @if (menu5Open()) {
+        <div class="md:hidden border-t border-gray-100">
+          <div class="px-4 py-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Inicio</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Componentes</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Ejemplos</a>
+            <!-- Profile -->
+            <div class="pt-3 mt-1 border-t border-gray-100">
+              <div class="flex items-center gap-3 px-3 py-2">
+                <div class="w-9 h-9 rounded-full bg-zinc-900 flex items-center justify-center text-white text-sm font-semibold shrink-0">JG</div>
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-gray-900 truncate">Juan García</p>
+                  <p class="text-xs text-gray-500 truncate">juan&#64;email.com</p>
+                </div>
+              </div>
+              <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Perfil</a>
+              <a href="#" class="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md" (click)="$event.preventDefault()">Configuración</a>
+              <a href="#" class="block px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md" (click)="$event.preventDefault()">Cerrar sesión</a>
+            </div>
+          </div>
+        </div>
+      }
+    </nav>
+  </doc-example-tabs>
+
+</div>

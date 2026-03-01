@@ -1,0 +1,144 @@
+<div class="p-4 sm:p-8 max-w-5xl mx-auto space-y-10">
+  <header>
+    <h1 class="text-2xl font-bold text-gray-900 mb-1">Register Form · Split Empresarial</h1>
+    <p class="text-sm text-gray-500">
+      Panel izquierdo con gradiente violeta de marca y panel derecho blanco con formulario de un solo paso.
+      El panel izquierdo se oculta en móvil.
+    </p>
+  </header>
+
+  <section>
+    <doc-example-tabs
+      title="Register Split — Panel de marca + formulario"
+      description="Rellena los campos y pulsa 'Crear cuenta gratis' para ver el modal de confirmación."
+      [htmlCode]="htmlCode"
+      [tsCode]="tsCode"
+    >
+      <!-- Split container -->
+      <div class="flex min-h-[560px] rounded-xl overflow-hidden border border-gray-200">
+
+        <!-- Left panel: brand gradient -->
+        <div class="hidden lg:flex flex-col justify-between w-72 xl:w-80 bg-gradient-to-br from-violet-800 to-indigo-900 px-8 py-10 shrink-0">
+          <!-- Logo -->
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-violet-900 font-black text-sm">G</span>
+            <span class="font-semibold text-white text-sm">Garaq UI</span>
+          </div>
+
+          <!-- Headline + features -->
+          <div class="space-y-5">
+            <h2 class="text-xl font-bold text-white leading-snug">
+              Únete a miles de equipos que ya confían en nosotros
+            </h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 w-5 h-5 rounded-full bg-violet-500/40 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span class="text-sm text-violet-100">Configuración en menos de 5 minutos</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 w-5 h-5 rounded-full bg-violet-500/40 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span class="text-sm text-violet-100">50+ componentes listos para producción</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 w-5 h-5 rounded-full bg-violet-500/40 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span class="text-sm text-violet-100">Soporte dedicado en menos de 24 h</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Testimonial -->
+          <blockquote class="border-l-2 border-white/30 pl-4">
+            <p class="text-sm text-violet-100 italic">"Pasamos de un prototipo a producción en una semana gracias a Garaq."</p>
+            <p class="mt-2 text-xs text-violet-300">Carlos Ruiz · CTO en StartupLab</p>
+          </blockquote>
+        </div>
+
+        <!-- Right panel: form -->
+        <div class="flex-1 flex items-center justify-center px-6 sm:px-8 py-10 bg-white">
+          <div class="w-full max-w-sm">
+            <!-- Mobile logo -->
+            <div class="flex items-center gap-2 mb-8 lg:hidden">
+              <span class="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-700 to-indigo-800 flex items-center justify-center text-white font-black text-sm">G</span>
+              <span class="font-semibold text-gray-900 text-sm">Garaq UI</span>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-1">Crea tu cuenta</h2>
+            <p class="text-sm text-gray-500 mb-7">Gratis para siempre · Sin tarjeta de crédito</p>
+
+            <div class="space-y-4">
+              <gc-input
+                inputLabel="Nombre completo" placeholder="María García"
+                [value]="name()" [invalid]="nameInvalid()"
+                [inputDescription]="nameInvalid() ? 'El nombre es obligatorio' : ''"
+                (valueChange)="name.set($event)">
+                <svg gcPrefix xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+              </gc-input>
+
+              <gc-input
+                inputLabel="Email de trabajo" type="email" placeholder="maria@empresa.com"
+                [value]="email()" [invalid]="emailInvalid()"
+                [inputDescription]="emailInvalid() ? 'El email es obligatorio' : ''"
+                (valueChange)="email.set($event)">
+                <svg gcPrefix xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </gc-input>
+
+              <gc-input
+                inputLabel="Contraseña" type="password" placeholder="Mín. 6 caracteres"
+                [value]="password()" [invalid]="passwordInvalid()"
+                [inputDescription]="passwordInvalid() ? 'Mínimo 6 caracteres' : ''"
+                (valueChange)="password.set($event)">
+                <svg gcPrefix xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </gc-input>
+
+              <div>
+                <gc-checkbox
+                  label="Acepto los términos y condiciones"
+                  [checked]="acceptTerms()"
+                  (checkedChange)="acceptTerms.set($event)" />
+                @if (termsInvalid()) {
+                  <p class="mt-1 text-xs text-red-500">Debes aceptar los términos</p>
+                }
+              </div>
+
+              <gc-button class="w-full" [disabled]="loading()" (click)="onRegister()">
+                @if (loading()) {
+                  <gc-spinner size="xs" color="#fff" /> Creando cuenta...
+                } @else {
+                  Crear cuenta gratis
+                }
+              </gc-button>
+            </div>
+
+            <p class="text-center text-sm text-gray-500 mt-6">
+              ¿Ya tienes cuenta?
+              <a routerLink="/examples/login" class="font-medium text-violet-700 hover:underline">Iniciar sesión</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </doc-example-tabs>
+  </section>
+</div>
+
+<gc-dialog title="¡Cuenta creada!" [open]="!!submittedData()" (closed)="onDialogClose()">
+  <div class="gc-dialog-data">
+    <div class="gc-dialog-row">
+      <span class="gc-dialog-label">Nombre</span>
+      <span class="gc-dialog-value">{{ submittedData()?.name }}</span>
+    </div>
+    <div class="gc-dialog-row">
+      <span class="gc-dialog-label">Email</span>
+      <span class="gc-dialog-value">{{ submittedData()?.email }}</span>
+    </div>
+    <p class="gc-dialog-note">Al cerrar este modal el formulario se reiniciará.</p>
+  </div>
+  <div gcDialogFooter>
+    <gc-button (click)="onDialogClose()">Entendido</gc-button>
+  </div>
+</gc-dialog>

@@ -1,18 +1,81 @@
-<div class="p-8 max-w-5xl mx-auto space-y-10">
-  <header>
-    <h1 class="text-2xl font-bold text-gray-900">Garaq Angular Components</h1>
-    <p class="mt-1 text-sm text-gray-500">Biblioteca de componentes UI para Angular. Explora cada componente con ejemplos en vivo y código fuente.</p>
-  </header>
+<!-- Hero -->
+<section class="gc-hero">
+  <div class="gc-hero-inner">
+    <!-- Pill -->
+    <div class="gc-hero-pill">
+      <span>Angular 21</span>
+      <span class="gc-hero-dot">·</span>
+      <span>Standalone</span>
+      <span class="gc-hero-dot">·</span>
+      <span>Signal-based</span>
+      <span class="gc-hero-dot">·</span>
+      <span>Tailwind CSS</span>
+    </div>
 
+    <!-- Title -->
+    <h1 class="gc-hero-title">
+      Componentes Angular
+      <span class="gc-hero-accent">listos para usar</span>
+    </h1>
+
+    <!-- Description -->
+    <p class="gc-hero-desc">
+      Biblioteca de componentes UI construida con signals, OnPush y Tailwind.
+      Primitivos configurables y bloques pre-armados para copiar y pegar.
+    </p>
+
+    <!-- Install command -->
+    <div class="gc-install">
+      <code class="gc-install-code">npm install garaq-angular-components</code>
+      <button class="gc-install-copy" (click)="copyInstall()" [attr.aria-label]="installCopied() ? 'Copiado' : 'Copiar'">
+        @if (installCopied()) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        } @else {
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        }
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="gc-hero-stats">
+      <div class="gc-stat">
+        <strong>{{ componentCount }}</strong>
+        <span>componentes</span>
+      </div>
+      <div class="gc-stat-divider"></div>
+      <div class="gc-stat">
+        <strong>{{ examples.length }}</strong>
+        <span>ejemplos</span>
+      </div>
+      <div class="gc-stat-divider"></div>
+      <div class="gc-stat">
+        <strong>Angular 21</strong>
+        <span>compatible</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Content grid -->
+<div class="p-8 max-w-5xl mx-auto space-y-10">
+
+  <!-- Components by category -->
   @for (category of categories; track category) {
     <section>
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">{{ category }}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @for (comp of getComponentsByCategory(category); track comp.name) {
-          <a [routerLink]="'/components/' + comp.name" class="no-underline">
-            <gc-card class="h-full transition-shadow hover:shadow-md">
-              <div gcCardHeader class="flex items-center justify-between">
-                <h3 class="text-sm font-semibold text-gray-900">{{ comp.displayName }}</h3>
+          <a [routerLink]="'/components/' + comp.name" class="gc-card-link">
+            <gc-card class="h-full">
+              <div gcCardHeader class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <h3 class="text-sm font-semibold text-gray-900 truncate">{{ comp.displayName }}</h3>
+                  @if (comp.badge === 'new') {
+                    <span class="gc-badge-new">New</span>
+                  } @else if (comp.badge === 'beta') {
+                    <span class="gc-badge-beta">Beta</span>
+                  }
+                </div>
                 <gc-badge size="sm" variant="secondary">{{ comp.selector }}</gc-badge>
               </div>
               <p class="text-xs text-gray-500">{{ comp.description }}</p>
@@ -23,14 +86,20 @@
     </section>
   }
 
+  <!-- Examples -->
   <section>
     <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Examples</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       @for (example of examples; track example.name) {
-        <a [routerLink]="'/examples/' + example.name" class="no-underline">
-          <gc-card class="h-full transition-shadow hover:shadow-md" variant="elevated">
-            <div gcCardHeader class="flex items-center justify-between">
-              <h3 class="text-sm font-semibold text-gray-900">{{ example.displayName }}</h3>
+        <a [routerLink]="'/examples/' + example.name" class="gc-card-link">
+          <gc-card class="h-full" variant="elevated">
+            <div gcCardHeader class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-semibold text-gray-900">{{ example.displayName }}</h3>
+                @if (example.badge === 'new') {
+                  <span class="gc-badge-new">New</span>
+                }
+              </div>
               <gc-badge size="sm">Example</gc-badge>
             </div>
             <p class="text-xs text-gray-500">{{ example.description }}</p>
@@ -39,4 +108,34 @@
       }
     </div>
   </section>
+
+  <!-- Blocks — shown when the registry has entries -->
+  @if (blocks.length > 0) {
+    @for (category of blockCategories; track category) {
+      @if (getBlocksByCategory(category).length > 0) {
+        <section>
+          <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">Blocks · {{ category }}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (block of getBlocksByCategory(category); track block.name) {
+              <a [routerLink]="'/blocks/' + block.name" class="gc-card-link">
+                <gc-card class="h-full" variant="elevated">
+                  <div gcCardHeader class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <h3 class="text-sm font-semibold text-gray-900">{{ block.displayName }}</h3>
+                      @if (block.badge === 'new') {
+                        <span class="gc-badge-new">New</span>
+                      }
+                    </div>
+                    <gc-badge size="sm" variant="secondary">Block</gc-badge>
+                  </div>
+                  <p class="text-xs text-gray-500">{{ block.description }}</p>
+                </gc-card>
+              </a>
+            }
+          </div>
+        </section>
+      }
+    }
+  }
+
 </div>

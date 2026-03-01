@@ -1,20 +1,10 @@
 <!-- Mobile top bar -->
 <header class="gc-topbar">
   <button class="gc-hamburger" (click)="toggleSidebar()" aria-label="Abrir menú">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" x2="20" y1="12" y2="12"/>
+      <line x1="4" x2="20" y1="6" y2="6"/>
+      <line x1="4" x2="20" y1="18" y2="18"/>
     </svg>
   </button>
   <a routerLink="/" class="gc-topbar-logo">
@@ -24,7 +14,11 @@
 </header>
 
 <!-- Overlay -->
-<div class="gc-overlay" [class.gc-overlay-visible]="sidebarOpen()" (click)="closeSidebar()"></div>
+<div
+  class="gc-overlay"
+  [class.gc-overlay-visible]="sidebarOpen()"
+  (click)="closeSidebar()"
+></div>
 
 <!-- Sidebar -->
 <aside class="gc-sidebar" [class.gc-sidebar-open]="sidebarOpen()">
@@ -34,19 +28,9 @@
       <span class="gc-logo-text">Garaq UI</span>
     </a>
     <button class="gc-close" (click)="closeSidebar()" aria-label="Cerrar menú">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <line x1="18" x2="6" y1="6" y2="18" />
-        <line x1="6" x2="18" y1="6" y2="18" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" x2="6" y1="6" y2="18"/>
+        <line x1="6" x2="18" y1="6" y2="18"/>
       </svg>
     </button>
   </div>
@@ -54,6 +38,7 @@
   <gc-separator />
 
   <nav class="gc-nav">
+    <!-- Components by category -->
     @for (category of categories; track category) {
       <div class="gc-nav-group">
         <span class="gc-nav-category">{{ category }}</span>
@@ -65,6 +50,11 @@
             (click)="closeSidebar()"
           >
             {{ comp.displayName }}
+            @if (comp.badge === 'new') {
+              <span class="gc-nav-badge gc-nav-badge-new">New</span>
+            } @else if (comp.badge === 'beta') {
+              <span class="gc-nav-badge gc-nav-badge-beta">Beta</span>
+            }
           </a>
         }
       </div>
@@ -72,6 +62,7 @@
 
     <gc-separator />
 
+    <!-- Examples -->
     <div class="gc-nav-group">
       <span class="gc-nav-category">Examples</span>
       @for (example of examples; track example.name) {
@@ -82,9 +73,39 @@
           (click)="closeSidebar()"
         >
           {{ example.displayName }}
+          @if (example.badge === 'new') {
+            <span class="gc-nav-badge gc-nav-badge-new">New</span>
+          }
         </a>
       }
     </div>
+
+    <!-- Blocks — only shown when the registry has entries -->
+    @if (blocks.length > 0) {
+      <gc-separator />
+      @for (category of blockCategories; track category) {
+        @if (getBlocksByCategory(category).length > 0) {
+          <div class="gc-nav-group">
+            <span class="gc-nav-category">{{ category }}</span>
+            @for (block of getBlocksByCategory(category); track block.name) {
+              <a
+                class="gc-nav-link"
+                [routerLink]="'/blocks/' + block.name"
+                routerLinkActive="gc-active"
+                (click)="closeSidebar()"
+              >
+                {{ block.displayName }}
+                @if (block.badge === 'new') {
+                  <span class="gc-nav-badge gc-nav-badge-new">New</span>
+                } @else if (block.badge === 'beta') {
+                  <span class="gc-nav-badge gc-nav-badge-beta">Beta</span>
+                }
+              </a>
+            }
+          </div>
+        }
+      }
+    }
   </nav>
 </aside>
 

@@ -11,4 +11,5 @@ export class ExampleSectionComponent {
   readonly title = input.required<string>();
   readonly description = input<string>();
   readonly code = input.required<string>();
+  readonly language = input<string>('html');
 }

@@ -1,0 +1,202 @@
+<div class="p-4 sm:p-8 max-w-5xl mx-auto space-y-10">
+  <header>
+    <h1 class="text-2xl font-bold text-gray-900 mb-1">Register Form</h1>
+    <p class="text-sm text-gray-500">
+      Tarjeta centrada sobre fondo gris con avatar dinámico, indicador de contraseña y confirmación.
+    </p>
+  </header>
+
+  <section>
+    <doc-example-tabs
+      title="Register — Avatar + indicador"
+      description="Escribe tu nombre para ver el avatar actualizarse. La barra reacciona a la contraseña en tiempo real."
+      [htmlCode]="htmlCode"
+      [tsCode]="tsCode"
+    >
+      <div class="bg-gray-50 min-h-[600px] flex items-center justify-center px-4 py-12 rounded-xl">
+        <div
+          class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-10"
+        >
+          <!-- Avatar preview -->
+          <div class="flex flex-col items-center mb-6">
+            <gc-avatar size="xl" [name]="name() || 'U'" background="#18181b" class="mb-3" />
+            <h2 class="text-xl font-bold text-gray-900">Crear cuenta</h2>
+            <p class="text-sm text-gray-500 mt-1">Tu avatar se actualiza al escribir tu nombre</p>
+          </div>
+
+          <div class="space-y-4">
+            <gc-input
+              inputLabel="Nombre completo"
+              placeholder="Ana López"
+              [value]="name()"
+              [invalid]="nameInvalid()"
+              [inputDescription]="nameInvalid() ? 'El nombre es obligatorio' : ''"
+              (valueChange)="name.set($event)"
+            >
+              <svg
+                gcPrefix
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="5" />
+                <path d="M20 21a8 8 0 1 0-16 0" />
+              </svg>
+            </gc-input>
+
+            <gc-input
+              inputLabel="Email"
+              type="email"
+              placeholder="ana@email.com"
+              [value]="email()"
+              [invalid]="emailInvalid()"
+              [inputDescription]="emailInvalid() ? 'El email es obligatorio' : ''"
+              (valueChange)="email.set($event)"
+            >
+              <svg
+                gcPrefix
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </gc-input>
+
+            <!-- Password + strength bar -->
+            <div>
+              <gc-input
+                inputLabel="Contraseña"
+                type="password"
+                placeholder="Mín. 8 caracteres (A-Z, 0-9, símbolo)"
+                [value]="password()"
+                [invalid]="passwordInvalid()"
+                [inputDescription]="passwordInvalid() ? 'Mínimo 6 caracteres' : ''"
+                (valueChange)="password.set($event)"
+              >
+                <svg
+                  gcPrefix
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </gc-input>
+
+              @if (password().length > 0) {
+                <div class="mt-2">
+                  <div class="flex gap-1">
+                    @for (seg of [1, 2, 3, 4]; track seg) {
+                      <div
+                        class="h-1 flex-1 rounded-full transition-colors duration-300"
+                        [class]="seg <= passwordStrength() ? strengthColor() : 'bg-gray-200'"
+                      ></div>
+                    }
+                  </div>
+                  <p
+                    class="text-xs mt-1"
+                    [class]="
+                      passwordStrength() >= 3 ? 'text-emerald-600 font-medium' : 'text-gray-500'
+                    "
+                  >
+                    {{ strengthLabel() }}
+                  </p>
+                </div>
+              }
+            </div>
+
+            <gc-input
+              inputLabel="Confirmar contraseña"
+              type="password"
+              placeholder="Repite la contraseña"
+              [value]="confirmPassword()"
+              [invalid]="confirmInvalid()"
+              [inputDescription]="confirmInvalid() ? 'Las contraseñas no coinciden' : ''"
+              (valueChange)="confirmPassword.set($event)"
+            >
+              <svg
+                gcPrefix
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </gc-input>
+
+            <div>
+              <gc-checkbox
+                label="Acepto los términos y condiciones"
+                [checked]="acceptTerms()"
+                (checkedChange)="acceptTerms.set($event)"
+              />
+              @if (termsInvalid()) {
+                <p class="mt-1 text-xs text-red-500">Debes aceptar los términos</p>
+              }
+            </div>
+
+            <gc-button class="w-full" [disabled]="loading()" (click)="onRegister()">
+              @if (loading()) {
+                <gc-spinner size="xs" color="#fff" /> Creando cuenta...
+              } @else {
+                Crear cuenta
+              }
+            </gc-button>
+          </div>
+
+          <p class="text-center text-sm text-gray-500 mt-6">
+            ¿Ya tienes cuenta?
+            <a routerLink="/examples/login" class="font-medium text-gray-900 hover:underline"
+              >Iniciar sesión</a
+            >
+          </p>
+        </div>
+      </div>
+    </doc-example-tabs>
+  </section>
+</div>
+
+<gc-dialog title="¡Cuenta creada!" [open]="!!submittedData()" (closed)="onDialogClose()">
+  <div class="gc-dialog-data">
+    <div class="gc-dialog-row">
+      <span class="gc-dialog-label">Nombre</span>
+      <span class="gc-dialog-value">{{ submittedData()?.name }}</span>
+    </div>
+    <div class="gc-dialog-row">
+      <span class="gc-dialog-label">Email</span>
+      <span class="gc-dialog-value">{{ submittedData()?.email }}</span>
+    </div>
+    <p class="gc-dialog-note">Al cerrar este modal el formulario se reiniciará.</p>
+  </div>
+  <div gcDialogFooter>
+    <gc-button (click)="onDialogClose()">Entendido</gc-button>
+  </div>
+</gc-dialog>

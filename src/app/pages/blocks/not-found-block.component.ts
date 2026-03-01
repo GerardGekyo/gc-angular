@@ -1,0 +1,345 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonComponent } from 'garaq-angular-components';
+import { ExampleSectionTabsComponent } from '../../shared/example-section-tabs/example-section-tabs.component';
+
+@Component({
+  selector: 'block-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ExampleSectionTabsComponent, ButtonComponent],
+  templateUrl: './not-found-block.component.html',
+  styleUrl: './not-found-block.component.css',
+})
+export class NotFoundBlockComponent {
+
+  // ─── 404 1: Minimal ────────────────────────────────────────────────────────
+
+  readonly nf1Html = `<div class="relative flex flex-col items-center justify-center
+     min-h-screen bg-white px-4 py-16 text-center overflow-hidden">
+
+  <!-- Decorative "404" behind content -->
+  <span
+    class="absolute text-[12rem] sm:text-[18rem] font-black text-gray-100
+           select-none leading-none pointer-events-none"
+    aria-hidden="true">404</span>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center">
+    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">
+      Error 404
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+      Página no encontrada
+    </h1>
+    <p class="text-gray-500 text-sm sm:text-base max-w-sm mb-8">
+      Lo sentimos, la página que buscas no existe o fue movida a otra dirección.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center gap-3">
+      <gc-button variant="outline" (click)="goBack()">← Volver</gc-button>
+      <gc-button (click)="goHome()">Ir al inicio</gc-button>
+    </div>
+  </div>
+</div>`;
+
+  readonly nf1Ts = `import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from 'garaq-angular-components';
+
+@Component({
+  selector: 'app-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ButtonComponent],
+  templateUrl: './not-found.component.html',
+})
+export class NotFoundComponent {
+  private readonly router = inject(Router);
+
+  goHome() { this.router.navigate(['/']); }
+  goBack() { history.back(); }
+}`;
+
+  // ─── 404 2: Oscuro ────────────────────────────────────────────────────────
+
+  readonly nf2Html = `<div class="flex flex-col items-center justify-center
+     min-h-screen bg-zinc-900 px-4 py-16 text-center">
+
+  <!-- Broken link icon -->
+  <div class="w-16 h-16 rounded-2xl bg-zinc-800 border border-zinc-700/50
+              flex items-center justify-center mb-6">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+         stroke-linejoin="round" class="text-zinc-500">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      <line x1="12" y1="7" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="17"/>
+    </svg>
+  </div>
+
+  <!-- 404 gradient -->
+  <p class="text-[6rem] sm:text-[8rem] font-black leading-none mb-4
+            bg-gradient-to-r from-violet-400 to-indigo-400
+            bg-clip-text text-transparent">
+    404
+  </p>
+
+  <h1 class="text-2xl sm:text-3xl font-bold text-white mb-3">
+    Oops! Página no encontrada
+  </h1>
+  <p class="text-zinc-400 text-sm sm:text-base max-w-sm mb-8">
+    No pudimos encontrar la página que buscas. Puede que haya sido
+    eliminada o que la URL sea incorrecta.
+  </p>
+
+  <div class="flex flex-col sm:flex-row items-center gap-3">
+    <button
+      class="px-5 py-2.5 rounded-lg border border-zinc-700 text-zinc-300 text-sm
+             font-medium hover:border-zinc-600 hover:text-white transition-colors"
+      (click)="goBack()">
+      ← Volver atrás
+    </button>
+    <button
+      class="px-5 py-2.5 rounded-lg bg-violet-600 text-white text-sm font-semibold
+             hover:bg-violet-500 transition-colors"
+      (click)="goHome()">
+      Ir al inicio
+    </button>
+  </div>
+</div>`;
+
+  readonly nf2Ts = `import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './not-found.component.html',
+})
+export class NotFoundComponent {
+  private readonly router = inject(Router);
+
+  goHome() { this.router.navigate(['/']); }
+  goBack() { history.back(); }
+}`;
+
+  // ─── 404 3: Illustrated ────────────────────────────────────────────────────
+
+  readonly nf3Html = `<div class="flex flex-col items-center justify-center
+     min-h-screen bg-white px-4 py-16 text-center">
+
+  <!-- Satellite SVG -->
+  <svg width="200" height="160" viewBox="0 0 200 160" fill="none"
+       xmlns="http://www.w3.org/2000/svg" class="mb-8" aria-hidden="true">
+    <!-- Left solar panel -->
+    <rect x="4" y="72" width="56" height="28" rx="4" fill="#ede9fe"/>
+    <line x1="4" y1="80" x2="60" y2="80" stroke="#c4b5fd" stroke-width="1"/>
+    <line x1="4" y1="88" x2="60" y2="88" stroke="#c4b5fd" stroke-width="1"/>
+    <rect x="58" y="81" width="10" height="10" rx="1" fill="#ddd6fe"/>
+    <!-- Body -->
+    <rect x="68" y="62" width="56" height="48" rx="8" fill="#7c3aed"/>
+    <rect x="76" y="72" width="16" height="12" rx="2" fill="#a78bfa"/>
+    <rect x="100" y="72" width="16" height="12" rx="2" fill="#a78bfa"/>
+    <circle cx="96" cy="95" r="5" fill="#c4b5fd"/>
+    <!-- Right solar panel -->
+    <rect x="124" y="72" width="56" height="28" rx="4" fill="#ede9fe"/>
+    <line x1="124" y1="80" x2="180" y2="80" stroke="#c4b5fd" stroke-width="1"/>
+    <line x1="124" y1="88" x2="180" y2="88" stroke="#c4b5fd" stroke-width="1"/>
+    <rect x="122" y="81" width="10" height="10" rx="1" fill="#ddd6fe"/>
+    <!-- Antenna -->
+    <line x1="96" y1="62" x2="96" y2="28" stroke="#7c3aed" stroke-width="3"
+          stroke-linecap="round"/>
+    <circle cx="96" cy="23" r="6" fill="#7c3aed"/>
+    <!-- Signal arcs (broken, dashed red) -->
+    <path d="M106 20 Q124 12 128 26" stroke="#ef4444" stroke-width="1.5"
+          stroke-dasharray="4 3" fill="none" stroke-linecap="round"/>
+    <path d="M110 12 Q134 2 140 18" stroke="#ef4444" stroke-width="1.5"
+          stroke-dasharray="4 3" fill="none" stroke-linecap="round"/>
+    <path d="M114 5 Q143 -7 153 12" stroke="#ef4444" stroke-width="1.5"
+          stroke-dasharray="4 3" fill="none" stroke-linecap="round"/>
+    <!-- X mark for lost signal -->
+    <line x1="150" y1="1" x2="164" y2="15" stroke="#ef4444" stroke-width="2.5"
+          stroke-linecap="round"/>
+    <line x1="164" y1="1" x2="150" y2="15" stroke="#ef4444" stroke-width="2.5"
+          stroke-linecap="round"/>
+    <!-- Stars -->
+    <circle cx="22" cy="18" r="2" fill="#ddd6fe"/>
+    <circle cx="170" cy="140" r="1.5" fill="#ddd6fe"/>
+    <circle cx="38" cy="145" r="2" fill="#ede9fe"/>
+    <circle cx="182" cy="50" r="1.5" fill="#ddd6fe"/>
+  </svg>
+
+  <p class="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-3">
+    Error 404
+  </p>
+  <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+    Señal perdida
+  </h1>
+  <p class="text-gray-500 text-sm sm:text-base max-w-xs sm:max-w-sm mb-8">
+    Houston, tenemos un problema. La página que buscas se perdió en el espacio.
+    No te preocupes, puedes volver a tierra firme.
+  </p>
+  <div class="flex flex-col sm:flex-row items-center gap-3">
+    <gc-button variant="outline" (click)="goBack()">← Volver atrás</gc-button>
+    <gc-button (click)="goHome()">Ir al inicio</gc-button>
+  </div>
+</div>`;
+
+  readonly nf3Ts = `import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from 'garaq-angular-components';
+
+@Component({
+  selector: 'app-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ButtonComponent],
+  templateUrl: './not-found.component.html',
+})
+export class NotFoundComponent {
+  private readonly router = inject(Router);
+
+  goHome() { this.router.navigate(['/']); }
+  goBack() { history.back(); }
+}`;
+
+  // ─── 404 4: Con Búsqueda ──────────────────────────────────────────────────
+
+  readonly nf4Html = `<div class="flex flex-col items-center justify-center
+     min-h-screen bg-gray-50 px-4 py-16 text-center">
+
+  <p class="text-[6rem] sm:text-[8rem] font-black text-gray-200 leading-none mb-2"
+     aria-hidden="true">404</p>
+  <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+    ¿Buscas algo en concreto?
+  </h1>
+  <p class="text-gray-500 text-sm max-w-xs mb-8">
+    No encontramos esa página. Prueba a buscar lo que necesitas.
+  </p>
+
+  <!-- Search bar -->
+  <div class="flex w-full max-w-md gap-2 mb-8">
+    <div class="relative flex-1 min-w-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round"
+           class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input
+        #queryInput
+        type="search"
+        placeholder="Buscar páginas, componentes..."
+        (keyup.enter)="search(queryInput.value)"
+        class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm
+               bg-white placeholder:text-gray-400 focus:outline-none
+               focus:border-violet-400 focus:ring-2 focus:ring-violet-100
+               transition-colors"
+      />
+    </div>
+    <gc-button class="shrink-0" (click)="search(queryInput.value)">Buscar</gc-button>
+  </div>
+
+  <!-- Popular links -->
+  <div class="flex flex-wrap justify-center gap-2 max-w-sm">
+    <p class="w-full text-xs text-gray-400 uppercase tracking-wider mb-1">
+      Páginas populares
+    </p>
+    <a href="/"
+       class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm
+              text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+      Inicio
+    </a>
+    <a href="/components"
+       class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm
+              text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+      Componentes
+    </a>
+    <a href="/examples"
+       class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm
+              text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+      Ejemplos
+    </a>
+    <a href="/blocks"
+       class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm
+              text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+      Blocks
+    </a>
+  </div>
+</div>`;
+
+  readonly nf4Ts = `import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from 'garaq-angular-components';
+
+@Component({
+  selector: 'app-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ButtonComponent],
+  templateUrl: './not-found.component.html',
+})
+export class NotFoundComponent {
+  private readonly router = inject(Router);
+
+  search(query: string) {
+    const q = query.trim();
+    if (q) this.router.navigate(['/search'], { queryParams: { q } });
+  }
+}`;
+
+  // ─── 404 5: Gradiente ─────────────────────────────────────────────────────
+
+  readonly nf5Html = `<div class="relative flex flex-col items-center justify-center
+     min-h-screen overflow-hidden px-4 py-16 text-center
+     bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700">
+
+  <!-- Decorative circles -->
+  <div class="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-white/5
+               pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-white/5
+               pointer-events-none"></div>
+  <div class="absolute top-1/3 left-1/4 w-56 h-56 rounded-full bg-white/5
+               pointer-events-none"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center">
+    <p class="text-white/60 text-xs font-semibold uppercase tracking-widest mb-2">
+      Error 404
+    </p>
+    <h1 class="text-[8rem] sm:text-[12rem] font-black text-white leading-none drop-shadow-lg">
+      404
+    </h1>
+    <p class="text-xl sm:text-2xl font-semibold text-white mb-3 -mt-4">
+      Página perdida en el espacio
+    </p>
+    <p class="text-white/70 text-sm sm:text-base max-w-sm mb-10">
+      La URL que ingresaste no lleva a ningún lado. Vuelve al inicio o usa
+      el botón atrás para continuar explorando.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center gap-4">
+      <a href="#"
+         class="px-5 py-2.5 rounded-lg border border-white/30 text-white text-sm
+                font-medium hover:bg-white/10 transition-colors">
+        ← Volver atrás
+      </a>
+      <a href="/"
+         class="px-5 py-2.5 rounded-lg bg-white text-purple-700 text-sm font-semibold
+                hover:bg-white/90 transition-colors shadow-lg">
+        Ir al inicio
+      </a>
+    </div>
+  </div>
+</div>`;
+
+  readonly nf5Ts = `import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-not-found',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './not-found.component.html',
+})
+export class NotFoundComponent {
+  private readonly router = inject(Router);
+
+  goHome() { this.router.navigate(['/']); }
+  goBack() { history.back(); }
+}`;
+}

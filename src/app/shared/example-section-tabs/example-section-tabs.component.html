@@ -1,0 +1,26 @@
+<div class="gc-example">
+  <h3 class="gc-example-title">{{ title() }}</h3>
+  @if (description(); as desc) {
+    <p class="gc-example-desc">{{ desc }}</p>
+  }
+  <div class="gc-example-preview">
+    <ng-content />
+  </div>
+  <div class="gc-code-tabs">
+    <button
+      class="gc-tab-btn"
+      [class.gc-tab-active]="activeTab() === 'html'"
+      (click)="activeTab.set('html')"
+    >HTML</button>
+    <button
+      class="gc-tab-btn"
+      [class.gc-tab-active]="activeTab() === 'ts'"
+      (click)="activeTab.set('ts')"
+    >TypeScript</button>
+  </div>
+  @if (activeTab() === 'html') {
+    <doc-code-block [code]="htmlCode()" language="html" />
+  } @else {
+    <doc-code-block [code]="tsCode()" language="typescript" />
+  }
+</div>
